@@ -137,7 +137,7 @@ public class AllMedia
   @Override
   public String toString()
   {
-    return "Title: " + getTitle() + " Category: " + getCategory() + " Time: " + getTime() + "Pers. Rating: " + getRating();
+    return "Title: " + getTitle() + " Category: " + getCategory() + " Time: " + getTime() + "Pers. Rating: " + getRatingP() + "IMDB Rating" + getRatingIMDB();
 
   }
 }

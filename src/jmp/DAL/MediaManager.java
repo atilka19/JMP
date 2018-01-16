@@ -52,14 +52,14 @@ public class MediaManager
  {
      try(Connection con = Cm.getConnection()) 
      {
-         PreparedStatement pstatement = con.prepareStatement(" INSERT INTO Movies (title, categories, lenght, path, rating)"
-          + "VALUES (?, ?, ?, ?, ?,)", Statement.RETURN_GENERATED_KEYS);
+         PreparedStatement pstatement = con.prepareStatement(" INSERT INTO Movies (title, categories, lenght, path, pers. rating, IMDB rating)"
+          + "VALUES (?, ?, ?, ?, ?, ?,)", Statement.RETURN_GENERATED_KEYS);
          pstatement.setString(1, media.getTitle());
          pstatement.setString(2, media.getCategory());
          pstatement.setDouble(3, media.getTime());
-         pstatement.setDouble(6, media.getRatingP());
-         pstatement.setDouble(6, media.getRatingIMDB());
-         pstatement.setString(4, media.getPath());
+         pstatement.setDouble(4, media.getRatingP());
+         pstatement.setDouble(5, media.getRatingIMDB());
+         pstatement.setString(6, media.getPath());
          int affected = pstatement.executeUpdate();
          if (affected < 1)
          {
@@ -71,8 +71,49 @@ public class MediaManager
              media.setID(RS.getInt(1));
          }
      }
-      
-     catch (Exception e) {
+     catch (Exception e) 
+     {
+         throw new DAException(e.getMessage());
+     }
+ }
+ public void edit(AllMedia media) throws DAException
+ {
+     try (Connection con = Cm.getConnection())
+     {
+         PreparedStatement pstatement = con.prepareStatement("Update Movie SET: Title=?, Categories=?, time=?, path=?, Pers. Rating=?, IMDB Rating=?");
+         pstatement.setString(1, media.getTitle());
+         pstatement.setString(2, media.getCategory());
+         pstatement.setDouble(3, media.getTime());
+         pstatement.setDouble(4, media.getRatingP());
+         pstatement.setDouble(5, media.getRatingIMDB());
+         pstatement.setString(6, media.getPath());
+         pstatement.setInt(7, media.getID());
+         int affected = pstatement.executeUpdate();
+         if (affected < 1)
+         {
+             throw new DAException("Movie could not be edited");
+         }
+     } 
+     catch (Exception e) 
+     {
+         throw new DAException (e.getMessage());
+     }
+ }
+ public void delete (AllMedia media) throws DAException
+ {
+     try (Connection con = Cm.getConnection())
+     {
+         PreparedStatement pstatement = con.prepareStatement("Delete from movie Library");
+         pstatement.setInt(1, media.getID());
+         int affected = pstatement.executeUpdate();
+         if (affected < 1)
+         {
+             throw new DAException("Movie could not be deleted");
+         }
+     }
+     catch (Exception e) 
+     {
+         throw new DAException(e.getMessage());
      }
  }
 }
