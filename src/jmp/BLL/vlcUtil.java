@@ -12,7 +12,7 @@ import uk.co.caprica.vlcj.player.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 import uk.co.caprica.vlcj.player.embedded.windows.Win32FullScreenStrategy;
 import javafx.scene.layout.AnchorPane;
-import jmp.GUI.MainController;
+import jmp.GUI.Controller.MainController;
 import jmp.JMP;
 
 public class vlcUtil 

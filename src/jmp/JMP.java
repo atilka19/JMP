@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package jmp;
 
 import javafx.application.Application;
@@ -14,7 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import jmp.GUI.MainController;
+import jmp.GUI.Controller.MainController;
 
 /**
  *
@@ -26,10 +22,10 @@ public class JMP extends Application {
     public void start(Stage stage) throws Exception 
     {
         
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("/gui/View/Main.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setTitle("JMP - Putting the VLC in Java");
+        stage.setTitle("JMP - The Night Owl");
         stage.show();
     }
     public static void main(String[] args) {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmp.GUI;
+package jmp.GUI.Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,10 +36,10 @@ import jmp.BE.AllMedia;
  */
 public class MainController implements Initializable 
 {
-    @FXML
+    /*@FXML
     private TableView <AllMedia> AllMedia;
     @FXML
-    private MediaView mv;
+    private MediaView mv;*/
     @FXML
     public Canvas Canvas1;
     @FXML
@@ -60,6 +60,7 @@ public class MainController implements Initializable
     private TableColumn<AllMedia, String> AllRating;
     
     private boolean isSearchActive;
+    //private MediaPlayerModel model;
     
     
     @Override
@@ -73,7 +74,7 @@ public class MainController implements Initializable
     {
         try 
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GUI/NewMovie.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GUI/View/NewMovie.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene (root1));
