@@ -63,7 +63,6 @@ public class MainController implements Initializable
     //private MediaPlayerModel model;
     
     
-    @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
       isSearchActive = false;
@@ -74,7 +73,7 @@ public class MainController implements Initializable
     {
         try 
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("GUI/View/NewMovie.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/View/NewMovie.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene (root1));
@@ -94,10 +93,10 @@ public class MainController implements Initializable
          Searchbar.setText("");   
         } 
         String searchString = Searchbar.getText();
-        searchForString(searchString);
+        //searchForString(searchString);
     }
     
-    private void searchForString(String searchString) 
+    /*private void searchForString(String searchString) 
     {
         if (!searchString.isEmpty()) 
         {
@@ -114,7 +113,7 @@ public class MainController implements Initializable
     private void showAlert(IOException ex) 
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
     
     
 }

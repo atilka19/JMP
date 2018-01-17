@@ -10,8 +10,8 @@ public class ConnectionManager {
     private SQLServerDataSource source = new SQLServerDataSource();
 
     public ConnectionManager() {
-        source.setDatabaseName("CS2017B_7_myTunes");
-        source.setUser("CS2017B_7_java");
+        source.setDatabaseName("NightOwl_Movies");
+        source.setUser("CS2017B_28_java");
         source.setPassword("javajava");
         source.setPortNumber(1433);
         source.setServerName("10.176.111.31");

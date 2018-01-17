@@ -48,4 +48,37 @@ public class MObjectManager
      }
      return this.categories;
  }
+ void addNew(AllMedia selectedMovie) throws BLLException
+ {
+     try 
+     {
+        Accessmanager.saveMedia(selectedMovie);
+     }
+     catch (DAException ex) 
+     {
+         throw new BLLException(ex);
+     }
+ }
+ void delete (AllMedia selected) throws BLLException
+ {
+     try 
+     {
+        Accessmanager.deleteMedia(selected);
+     } 
+     catch (DAException ex) 
+     {
+         throw new BLLException(ex);
+     }
+ }
+ void updateMedia(AllMedia selectedMovie) throws BLLException 
+ {
+        try 
+        {
+            Accessmanager.editMedia(selectedMovie);
+        }
+        catch (DAException ex) 
+        {
+            throw new BLLException(ex);
+        }
+ }
 }
