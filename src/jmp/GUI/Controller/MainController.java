@@ -5,6 +5,7 @@
  */
 package jmp.GUI.Controller;
 
+import gui.model.PlayerModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -23,7 +24,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
-import javafx.scene.media.MediaView;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
@@ -34,9 +34,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import jmp.BE.AllMedia;
 import jmp.BE.MovieList;
-import jmp.DAL.ConnectionManager;
 
 
 /**
@@ -78,6 +76,8 @@ public class MainController implements Initializable
     private ImageView SelectedMoviePic;
     @FXML
     private TableView<MovieList> tableMovies;
+    
+    private PlayerModel model;
     
     
     public void initialize(URL url, ResourceBundle rb) 
@@ -136,7 +136,7 @@ public class MainController implements Initializable
         tableMovies.setItems(data);
     }
     
-    /*private void searchForString(String searchString) 
+    private void searchForString(String searchString) 
     {
         if (!searchString.isEmpty()) 
         {
@@ -153,7 +153,7 @@ public class MainController implements Initializable
     private void showAlert(IOException ex) 
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
+    }
     
     
 }

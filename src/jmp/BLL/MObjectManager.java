@@ -20,6 +20,20 @@ public class MObjectManager
  {
      this.Accessmanager = dm;
  }
+ List<AllMedia> getMedia() throws BLLException
+ {
+     try 
+     {
+         List<AllMedia> uMediaList = Accessmanager.getAllMedia();
+         return uMediaList;
+         
+     }
+     catch (DAException ex)
+     {
+         throw new BLLException(ex);
+     }
+  
+ }
  public List<String> getCategories() throws BLLException
  {
      if(categories == null)

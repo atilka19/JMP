@@ -26,7 +26,7 @@ public class NewMovieController implements Initializable {
         // TODO
     }    
     
-    private void saveDataFromTextFields()
+    /*private void saveDataFromTextFields()
     {
         try
         {
@@ -54,6 +54,6 @@ public class NewMovieController implements Initializable {
             Logger.getLogger(NewSongController.class.getName()).log(Level.SEVERE, null, ex);
             showAlert(ex);
         }
-    }
+    }*/
     
 }

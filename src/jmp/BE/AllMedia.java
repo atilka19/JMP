@@ -23,6 +23,7 @@ public class AllMedia
     private final StringProperty Path = new SimpleStringProperty();;
     private double prating;
     private double rating;
+    private Media media;
     
   public AllMedia(String Name, String Path, double rating, double prating)
   {
@@ -30,6 +31,19 @@ public class AllMedia
       this.Path.set(Path);
       this.rating = prating;
       this.prating = rating;
+      this.media = media;
+  }
+  public void createMediaFromPath() throws Exception
+  {
+      try 
+      {
+          File f = new File(Path.get());
+          this.media = new Media(f.toURI().toString());
+      }
+      catch (Exception ex) 
+      {
+          System.out.println(ex.getMessage());
+      }
   }
 
     public AllMedia() 
