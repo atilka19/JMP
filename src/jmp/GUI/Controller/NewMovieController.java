@@ -9,7 +9,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -17,6 +19,15 @@ import javafx.fxml.Initializable;
  * @author atilk
  */
 public class NewMovieController implements Initializable {
+
+    @FXML
+    private TextField movieName;
+    @FXML
+    private TextField movieRating;
+    @FXML
+    private TextField moviePRating;
+    @FXML
+    private TextField moviePath;
 
     /**
      * Initializes the controller class.
@@ -30,14 +41,14 @@ public class NewMovieController implements Initializable {
     {
         try
         {
-            String artist = songArtistField.getText();
-            String title = titleOfSongField.getText();
-            String path = songPathField.getText();
-            String category = chooseCategoryComboBox.getValue();
+            String name = movieName.getText();
+            String rating = movieRating.getText();
+            String prating = moviePRating.getText();
+            String path = moviePath.getText();
             
-            workingUserMedia.setArtist(artist);
-            workingUserMedia.setTitle(title);
-            workingUserMedia.setCategory(category);
+            workingUserMedia.setArtist(name);
+            workingUserMedia.setTitle(rating);
+            workingUserMedia.setCategory(prating);
             workingUserMedia.setPath(path);
             
             if (mode == Mode.NEW)
@@ -51,7 +62,7 @@ public class NewMovieController implements Initializable {
         } 
         catch (ModelException ex)
         {
-            Logger.getLogger(NewSongController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewMovieController.class.getName()).log(Level.SEVERE, null, ex);
             showAlert(ex);
         }
     }
