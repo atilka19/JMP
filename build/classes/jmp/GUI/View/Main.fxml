@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmp.GUI.Controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmp.GUI.Controller.MainController">
    <children>
       <TableView fx:id="tableMovies" layoutY="138.0" prefHeight="275.0" prefWidth="800.0">
         <columns>
@@ -20,7 +20,7 @@
         </columns>
       </TableView>
       <TextField fx:id="SearchBar" layoutX="14.0" layoutY="104.0" prefHeight="25.0" prefWidth="250.0" text="What are you looking for ?" />
-      <Button layoutX="556.0" layoutY="104.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="131.0" text="Play Selected Movie" />
+      <Button layoutX="556.0" layoutY="104.0" mnemonicParsing="false" onAction="#onClick_PLAY" prefHeight="25.0" prefWidth="131.0" text="Play Selected Movie" />
       <Button layoutX="119.0" layoutY="67.0" mnemonicParsing="false" onAction="#addMovieClicked" text="Add Movie" />
       <Button layoutX="17.0" layoutY="67.0" mnemonicParsing="false" onAction="#addCategoryClicked" text="Add Category" />
       <ComboBox layoutX="240.0" layoutY="67.0" prefWidth="150.0" />

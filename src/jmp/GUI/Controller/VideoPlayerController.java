@@ -46,20 +46,6 @@ public class VideoPlayerController implements Initializable {
         mv.setMediaPlayer(player);
         player.play();
     }    
-
-    private void onClick_btnStop(ActionEvent event) {
-        player.stop();
-    }
-
-    private void onClick_btnPlay(ActionEvent event) {
-        if (player.getStatus()==PLAYING) {
-            player.stop();
-            player.play();
-        }
-        else {
-            player.play();
-        } 
-    }
     
     
 }

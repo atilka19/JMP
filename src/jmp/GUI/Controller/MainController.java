@@ -29,7 +29,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -185,10 +184,11 @@ public class MainController implements Initializable
         });
     }
     
+    @FXML
     private void onClick_PLAY(ActionEvent event) {
                 try 
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/View/VideoPlayer.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/jmp/GUI/View/VideoPlayer.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setFullScreen(true);
