@@ -8,15 +8,14 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="Selected" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmp.GUI.Controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmp.GUI.Controller.MainController">
    <children>
-      <TableView layoutY="325.0" prefHeight="275.0" prefWidth="800.0">
+      <TableView fx:id="tableMovies" layoutY="325.0" prefHeight="275.0" prefWidth="800.0">
         <columns>
-          <TableColumn prefWidth="158.0" text="Title" />
-          <TableColumn prefWidth="206.0" text="Categories" />
-            <TableColumn prefWidth="182.0" text="Lenght" />
-            <TableColumn prefWidth="127.0" text="Pers. Rating" />
-            <TableColumn prefWidth="127.0" text="IMDB Rating" />
+          <TableColumn fx:id="cName" prefWidth="189.0" text="Name" />
+          <TableColumn fx:id="cRating" prefWidth="212.5" text="Rating" />
+            <TableColumn fx:id="cPRating" prefWidth="216.5" text="Personal Rating" />
+            <TableColumn fx:id="cPath" prefWidth="178.5" text="Path" />
         </columns>
       </TableView>
       <TextField fx:id="SearchBar" layoutX="536.0" layoutY="288.0" prefHeight="25.0" prefWidth="250.0" text="Search" />

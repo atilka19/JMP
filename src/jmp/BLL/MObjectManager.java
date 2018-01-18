@@ -20,26 +20,6 @@ public class MObjectManager
  {
      this.Accessmanager = dm;
  }
- List <AllMedia> getMedia() throws BLLException
- {
-     try 
-     {
-       List< AllMedia> nMediaList = Accessmanager.getAllMedia();
-       categories = new ArrayList<>();
-       for (AllMedia allMedia : nMediaList)
-       {
-           if(!categories.contains(allMedia.getCategory()))
-           {
-               categories.add(allMedia.getCategory());
-           }
-       }
-       return nMediaList;
-     }
-     catch (DAException ex) 
-     {
-      throw new BLLException(ex);
-     }
- }
  public List<String> getCategories() throws BLLException
  {
      if(categories == null)

@@ -24,21 +24,17 @@ public class MediaManager
  public List<AllMedia> getAll() throws DAException 
  {
      List<AllMedia> mediaList = new ArrayList();
-     try (Connection con = Cm.getConnection()) 
+     try (Connection con = Cm.dbConnection()) 
      {
          PreparedStatement pstatement = con.prepareStatement("SELECT * FROM Movies");
          ResultSet result = pstatement.executeQuery();
          while (result.next())
          {
                 AllMedia tempMedia = new AllMedia();
-                tempMedia.setID(result.getInt("id"));
-                tempMedia.setTitle(result.getString("title"));
-                tempMedia.setCategory(result.getString("category"));
-                tempMedia.setTime(result.getInt("time"));
-                tempMedia.setRatingP(result.getDouble("RatingP"));
-                tempMedia.setRatingP(result.getDouble("RatingIMDB"));
+                tempMedia.setTitle(result.getString("name"));
+                tempMedia.setRatingP(result.getDouble("rating"));
+                tempMedia.setRatingP(result.getDouble("prating"));
                 tempMedia.setPath(result.getString("path"));
-                tempMedia.AddFromPath();
                 mediaList.add(tempMedia);
          }    
          } 
@@ -50,26 +46,20 @@ public class MediaManager
  }
  public void save(AllMedia media) throws DAException
  {
-     try(Connection con = Cm.getConnection()) 
+     try(Connection con = Cm.dbConnection()) 
      {
-         PreparedStatement pstatement = con.prepareStatement(" INSERT INTO Movies (title, categories, lenght, path, pers. rating, IMDB rating)"
-          + "VALUES (?, ?, ?, ?, ?, ?,)", Statement.RETURN_GENERATED_KEYS);
-         pstatement.setString(1, media.getTitle());
-         pstatement.setString(2, media.getCategory());
-         pstatement.setDouble(3, media.getTime());
-         pstatement.setDouble(4, media.getRatingP());
-         pstatement.setDouble(5, media.getRatingIMDB());
-         pstatement.setString(6, media.getPath());
+         PreparedStatement pstatement = con.prepareStatement("Insert into movies(name,,rating,prating,path) Values(?,?,?,?)", 
+         Statement.RETURN_GENERATED_KEYS);
+         pstatement.setString(2, media.getTitle());
+         pstatement.setDouble(3, media.getRatingP());
+         pstatement.setDouble(4, media.getRatingIMDB());
+         pstatement.setString(5, media.getPath());
          int affected = pstatement.executeUpdate();
          if (affected < 1)
          {
           throw new DAException("Movie could not be added!");
          }
          ResultSet RS = pstatement.getGeneratedKeys();
-         if(RS.next())
-         {
-             media.setID(RS.getInt(1));
-         }
      }
      catch (Exception e) 
      {
@@ -78,16 +68,13 @@ public class MediaManager
  }
  public void edit(AllMedia media) throws DAException
  {
-     try (Connection con = Cm.getConnection())
+     try (Connection con = Cm.dbConnection())
      {
          PreparedStatement pstatement = con.prepareStatement("Update Movie SET: Title=?, Categories=?, time=?, path=?, Pers. Rating=?, IMDB Rating=?");
          pstatement.setString(1, media.getTitle());
-         pstatement.setString(2, media.getCategory());
-         pstatement.setDouble(3, media.getTime());
          pstatement.setDouble(4, media.getRatingP());
          pstatement.setDouble(5, media.getRatingIMDB());
          pstatement.setString(6, media.getPath());
-         pstatement.setInt(7, media.getID());
          int affected = pstatement.executeUpdate();
          if (affected < 1)
          {
@@ -101,10 +88,9 @@ public class MediaManager
  }
  public void delete (AllMedia media) throws DAException
  {
-     try (Connection con = Cm.getConnection())
+     try (Connection con = Cm.dbConnection())
      {
          PreparedStatement pstatement = con.prepareStatement("Delete from movie Library");
-         pstatement.setInt(1, media.getID());
          int affected = pstatement.executeUpdate();
          if (affected < 1)
          {
@@ -116,4 +102,5 @@ public class MediaManager
          throw new DAException(e.getMessage());
      }
  }
+ 
 }

@@ -7,9 +7,15 @@ package jmp.GUI.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,11 +28,15 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jmp.BE.AllMedia;
+import jmp.BE.MovieList;
+import jmp.DAL.ConnectionManager;
 
 
 /**
@@ -40,32 +50,43 @@ public class MainController implements Initializable
     private TableView <AllMedia> AllMedia;
     @FXML
     private MediaView mv;*/
-    @FXML
     public Canvas Canvas1;
-    @FXML
     public AnchorPane Alap;
-    @FXML
     public Pane Pn;
-    @FXML
     public TextField Searchbar;
-    @FXML
     public ListView searchList;
-    @FXML
-    private TableColumn<AllMedia, String> AllTitle;
-    @FXML
-    private TableColumn<AllMedia, String> AllCategories;
-    @FXML
-    private TableColumn<AllMedia, String> AllLenght;
-    @FXML
-    private TableColumn<AllMedia, String> AllRating;
-    
+    private Connection con = null;
+    private PreparedStatement pst = null;
+    private ResultSet rs = null;
+    private ObservableList<MovieList> data;
     private boolean isSearchActive;
+    @FXML
+    private ListView<?> Selected;
+    @FXML
+    private TableColumn<?, ?> cName;
+    @FXML
+    private TableColumn<?, ?> cRating;
+    
+    @FXML
+    private TableColumn<?, ?> cPRating;
     //private MediaPlayerModel model;
+    @FXML
+    private TableColumn<?, ?> cPath;
+    @FXML
+    private TextField SearchBar;
+    @FXML
+    private ImageView SelectedMoviePic;
+    @FXML
+    private TableView<MovieList> tableMovies;
     
     
     public void initialize(URL url, ResourceBundle rb) 
     {
+      data = FXCollections.observableArrayList();
+      con = jmp.DAL.ConnectionManager.dbConnection();
       isSearchActive = false;
+      setCellTable();
+      loadDataFromDB();
     }
 // New Window Openings
     @FXML
@@ -85,7 +106,6 @@ public class MainController implements Initializable
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    @FXML
     private void searchClicked(MouseEvent event)
     {
         if (isSearchActive) 
@@ -94,6 +114,26 @@ public class MainController implements Initializable
         } 
         String searchString = Searchbar.getText();
         //searchForString(searchString);
+    }
+    
+    private void setCellTable() {
+        cName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        cPRating.setCellValueFactory(new PropertyValueFactory<>("prating"));
+        cPath.setCellValueFactory(new PropertyValueFactory<>("path"));
+    }
+    private void loadDataFromDB() {
+        data.clear();
+        try {
+            pst = con.prepareStatement("SELECT * FROM Movies");
+            rs = pst.executeQuery();
+            while(rs.next()){
+                data.add(new MovieList(rs.getString(2), ""+rs.getDouble(3), ""+rs.getDouble(4), rs.getString(5)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tableMovies.setItems(data);
     }
     
     /*private void searchForString(String searchString) 

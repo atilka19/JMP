@@ -14,10 +14,7 @@ public class LogicManager
  private AccessManager DataManager = new AccessManager();
  private MObjectManager MediaManager = new MObjectManager(DataManager);
  
- public List<AllMedia> loadMedia() throws BLLException
- {
-     return MediaManager.getMedia();
- }
+
  public void addNewMedia (AllMedia NewMedia) throws BLLException
  {
      try 
