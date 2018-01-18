@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmp.gui.model;
+package jmp.model;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
@@ -13,6 +13,7 @@ import jmp.BE.AllMedia;
 import jmp.BLL.BLLException;
 import jmp.BLL.LogicManager;
 import jmp.GUI.Controller.Modes;
+import jmp.model.PlayerModel;
 
 /**
  *

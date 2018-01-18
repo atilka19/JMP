@@ -83,6 +83,7 @@ public class MainController implements Initializable
       setCellTable();
       loadDataFromDB();
       setListenersAndEventHandlers();
+
       //model = PlayerModel.getInstance();
     }
         private void setCellTable() {
@@ -154,6 +155,7 @@ public class MainController implements Initializable
         //searchForString(searchString);
     }
     
+    
 
     private void loadDataFromDB() {
         data.clear();
@@ -168,6 +170,12 @@ public class MainController implements Initializable
         }
         tableMovies.setItems(data);
     }
+    
+    public String getPath(){
+            MovieList perma = tableMovies.getSelectionModel().getSelectedItem();
+            return perma.getPath();
+    }
+    
     private void setListenersAndEventHandlers()
     {
         SearchBar.setOnKeyPressed(new EventHandler<KeyEvent>()
@@ -184,10 +192,14 @@ public class MainController implements Initializable
         });
     }
     
+    
+    
     @FXML
     private void onClick_PLAY(ActionEvent event) {
                 try 
         {
+            System.out.println(getPath());
+            MovieList perma = tableMovies.getSelectionModel().getSelectedItem();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/jmp/GUI/View/VideoPlayer.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();

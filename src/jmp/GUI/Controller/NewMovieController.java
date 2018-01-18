@@ -11,7 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import jmp.BE.AllMedia;
-import jmp.gui.model.PlayerModel;
+import jmp.model.PlayerModel;
 
 /**
  * FXML Controller class
@@ -54,14 +54,13 @@ public class NewMovieController implements Initializable {
         {
             
         }
-    }    
-    /*
+    }    /*
     private void fillData()
     {
         movieName.setText(workingMedia.getTitle().isEmpty() ? "Unkown" : workingMedia.getTitle());
         movieRating.set
         moviePRating
         moviePath
-    }
-    */
+    } 
+*/
 }

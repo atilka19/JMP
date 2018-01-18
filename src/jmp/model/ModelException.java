@@ -1,4 +1,4 @@
-package jmp.gui.model;
+package jmp.model;
 
 
 //for errors

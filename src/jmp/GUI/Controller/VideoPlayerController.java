@@ -10,14 +10,12 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import static javafx.scene.media.MediaPlayer.Status.PLAYING;
 import javafx.scene.media.MediaView;
+import jmp.GUI.Controller.MainController;
 
 /**
  * FXML Controller class
@@ -29,13 +27,18 @@ public class VideoPlayerController implements Initializable {
     @FXML
     private MediaView mv;
     MediaPlayer player;
+    private MainController user;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
+        
+        
+        String path = user.getPath();
+        System.out.println(path);
         Media media = new Media(new File("C:/Users/dell/Downloads/Brooklyn99/ep1.mp4").toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
         final DoubleProperty width = mv.fitWidthProperty();
