@@ -145,6 +145,7 @@ public class PlayerModel
           throw new ModelException(ex);
       }
   }
+  /*
   public BooleanProperty isPlaying()
   {
       return LogicManager.isPlaying();
@@ -166,6 +167,7 @@ public class PlayerModel
           }
       }
   }
+  /*
   public void playMedia() throws ModelException
   {
       try 
@@ -188,5 +190,5 @@ public class PlayerModel
           throw new ModelException(ex);
       }
   }
-  
+  */
 }

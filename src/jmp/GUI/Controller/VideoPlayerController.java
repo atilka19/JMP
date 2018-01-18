@@ -5,11 +5,19 @@
  */
 package jmp.GUI.Controller;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.DoubleProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import static javafx.scene.media.MediaPlayer.Status.PLAYING;
+import javafx.scene.media.MediaView;
 
 /**
  * FXML Controller class
@@ -19,16 +27,39 @@ import javafx.scene.control.Button;
 public class VideoPlayerController implements Initializable {
 
     @FXML
-    private Button btnPlay;
-    @FXML
-    private Button btnStop;
+    private MediaView mv;
+    MediaPlayer player;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+
+        Media media = new Media(new File("C:/Users/dell/Downloads/Brooklyn99/ep1.mp4").toURI().toString());
+        MediaPlayer player = new MediaPlayer(media);
+        final DoubleProperty width = mv.fitWidthProperty();
+        final DoubleProperty height = mv.fitHeightProperty();
+        width.bind(Bindings.selectDouble(mv.sceneProperty(), "width"));
+        height.bind(Bindings.selectDouble(mv.sceneProperty(), "height"));
+        mv.setPreserveRatio(true);
+        mv.setMediaPlayer(player);
+        player.play();
     }    
+
+    private void onClick_btnStop(ActionEvent event) {
+        player.stop();
+    }
+
+    private void onClick_btnPlay(ActionEvent event) {
+        if (player.getStatus()==PLAYING) {
+            player.stop();
+            player.play();
+        }
+        else {
+            player.play();
+        } 
+    }
+    
     
 }

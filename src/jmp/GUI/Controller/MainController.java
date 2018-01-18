@@ -5,7 +5,6 @@
  */
 package jmp.GUI.Controller;
 
-import jmp.gui.model.PlayerModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -62,8 +61,6 @@ public class MainController implements Initializable
     private ObservableList<MovieList> data;
     private boolean isSearchActive;
     @FXML
-    private ListView<?> Selected;
-    @FXML
     private TableColumn<?, ?> cName;
     @FXML
     private TableColumn<?, ?> cRating;
@@ -74,11 +71,9 @@ public class MainController implements Initializable
     @FXML
     private TextField SearchBar;
     @FXML
-    private ImageView SelectedMoviePic;
-    @FXML
     private TableView<MovieList> tableMovies;
     
-    private PlayerModel model;
+    //private PlayerModel model;
     
     
     public void initialize(URL url, ResourceBundle rb) 
@@ -89,7 +84,7 @@ public class MainController implements Initializable
       setCellTable();
       loadDataFromDB();
       setListenersAndEventHandlers();
-      model = PlayerModel.getInstance();
+      //model = PlayerModel.getInstance();
     }
         private void setCellTable() {
         cName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -184,12 +179,30 @@ public class MainController implements Initializable
              if (event.getCode() == KeyCode.ENTER)
              {
                  String searchString = SearchBar.getText();
-                 searchForString(searchString);
+                 //searchForString(searchString);
              }
          }
         });
     }
     
+    private void onClick_PLAY(ActionEvent event) {
+                try 
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/View/VideoPlayer.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setFullScreen(true);
+            stage.setScene(new Scene (root1));
+            stage.setTitle("Enjoy!");
+            stage.show();
+        } 
+        catch (IOException ex) 
+        {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    /*
     private void searchForString(String searchString) 
     {
         if (!searchString.isEmpty()) 
@@ -208,7 +221,11 @@ public class MainController implements Initializable
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+    */
+
+    @FXML
+    private void searchClicked(ActionEvent event) {
+    }
     
 }
 

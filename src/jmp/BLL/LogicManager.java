@@ -62,7 +62,10 @@ public List<String> getCategories() throws BLLException
          throw new BLLException("No Selection!");
      }
      return this.selectedMedia;
+     
+
  }
+ /*
  public void setMedia(AllMedia media) throws BLLException
  {
      if (media == null)
@@ -84,6 +87,5 @@ public BooleanProperty isPlaying()
     return player.isPlayingProperty();
 }
 
- 
- 
+ */
 }

@@ -46,7 +46,7 @@ public class NewMovieController implements Initializable {
             {
              mode = Modes.EDIT;
              workingMedia = model.getSelectedMedia();
-             fillData();
+             //fillData();
             } else {
             }
         }
@@ -55,6 +55,7 @@ public class NewMovieController implements Initializable {
             
         }
     }    
+    /*
     private void fillData()
     {
         movieName.setText(workingMedia.getTitle().isEmpty() ? "Unkown" : workingMedia.getTitle());
@@ -62,6 +63,5 @@ public class NewMovieController implements Initializable {
         moviePRating
         moviePath
     }
-    
-    
+    */
 }
