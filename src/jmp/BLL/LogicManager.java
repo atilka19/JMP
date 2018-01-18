@@ -5,7 +5,6 @@ import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import jmp.BE.AllMedia;
 import jmp.DAL.AccessManager;
-import static sun.audio.AudioPlayer.player;
 
 /**
  * @author atilk
@@ -70,7 +69,7 @@ public List<String> getCategories() throws BLLException
      {
          throw new BLLException("No selection!");
      }
-     player. setMedia(media);
+     player.setMedia(media);
  }
  public void playMedia() throws BLLException
  {

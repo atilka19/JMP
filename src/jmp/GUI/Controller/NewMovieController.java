@@ -7,11 +7,11 @@ package jmp.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
+import jmp.BE.AllMedia;
+import jmp.gui.model.PlayerModel;
 
 /**
  * FXML Controller class
@@ -28,43 +28,40 @@ public class NewMovieController implements Initializable {
     private TextField moviePRating;
     @FXML
     private TextField moviePath;
+    
+    private PlayerModel model;
+    private AllMedia workingMedia;
+    private Modes mode;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    
-    /*private void saveDataFromTextFields()
+    public void initialize(URL url, ResourceBundle resources) 
     {
         try
         {
-            String name = movieName.getText();
-            String rating = movieRating.getText();
-            String prating = moviePRating.getText();
-            String path = moviePath.getText();
-            
-            workingUserMedia.setArtist(name);
-            workingUserMedia.setTitle(rating);
-            workingUserMedia.setCategory(prating);
-            workingUserMedia.setPath(path);
-            
-            if (mode == Mode.NEW)
+            model = PlayerModel.getInstance();
+            if (model.getMediaMode() == jmp.GUI.Controller.Modes.EDIT) 
             {
-                model.addNewMedia(workingUserMedia);
+             mode = Modes.EDIT;
+             workingMedia = model.getSelectedMedia();
+             fillData();
+            } else {
             }
-            else
-            {
-                model.updateMedia(workingUserMedia);
-            }
-        } 
-        catch (ModelException ex)
-        {
-            Logger.getLogger(NewMovieController.class.getName()).log(Level.SEVERE, null, ex);
-            showAlert(ex);
         }
-    }*/
+        catch (Exception e)
+        {
+            
+        }
+    }    
+    private void fillData()
+    {
+        movieName.setText(workingMedia.getTitle().isEmpty() ? "Unkown" : workingMedia.getTitle());
+        movieRating.set
+        moviePRating
+        moviePath
+    }
+    
     
 }

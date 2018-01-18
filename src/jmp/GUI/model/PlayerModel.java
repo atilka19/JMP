@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.model;
+package jmp.gui.model;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;

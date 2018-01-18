@@ -5,7 +5,7 @@
  */
 package jmp.GUI.Controller;
 
-import gui.model.PlayerModel;
+import jmp.gui.model.PlayerModel;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -30,11 +31,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jmp.BE.MovieList;
+import javafx.scene.input.KeyEvent;
 
 
 /**
@@ -64,10 +67,8 @@ public class MainController implements Initializable
     private TableColumn<?, ?> cName;
     @FXML
     private TableColumn<?, ?> cRating;
-    
     @FXML
     private TableColumn<?, ?> cPRating;
-    //private MediaPlayerModel model;
     @FXML
     private TableColumn<?, ?> cPath;
     @FXML
@@ -87,6 +88,14 @@ public class MainController implements Initializable
       isSearchActive = false;
       setCellTable();
       loadDataFromDB();
+      setListenersAndEventHandlers();
+      model = PlayerModel.getInstance();
+    }
+        private void setCellTable() {
+        cName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+        cPRating.setCellValueFactory(new PropertyValueFactory<>("prating"));
+        cPath.setCellValueFactory(new PropertyValueFactory<>("path"));
     }
 // New Window Openings
     @FXML
@@ -106,6 +115,41 @@ public class MainController implements Initializable
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @FXML
+    private void addCategoryClicked (ActionEvent event)
+    {
+        try 
+        { FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/View/NewCategory.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root1));
+        stage.setTitle("Add a New Category");
+        stage.show();
+            
+        }
+        catch (IOException ex) 
+        {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    @FXML
+    private void addMovieToCategoryClicked (ActionEvent event)
+    {
+        try 
+        {
+         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/View/AddMovietoCategory.fxml"));
+         Parent root1 = (Parent) fxmlLoader.load();
+         Stage stage = new Stage();
+         stage.setScene(new Scene (root1));
+         stage.setTitle("Add a Movie to Category");
+         stage.show();
+        }
+        catch (IOException ex) 
+        {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void searchClicked(MouseEvent event)
     {
         if (isSearchActive) 
@@ -116,12 +160,7 @@ public class MainController implements Initializable
         //searchForString(searchString);
     }
     
-    private void setCellTable() {
-        cName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cRating.setCellValueFactory(new PropertyValueFactory<>("rating"));
-        cPRating.setCellValueFactory(new PropertyValueFactory<>("prating"));
-        cPath.setCellValueFactory(new PropertyValueFactory<>("path"));
-    }
+
     private void loadDataFromDB() {
         data.clear();
         try {
@@ -134,6 +173,21 @@ public class MainController implements Initializable
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
         tableMovies.setItems(data);
+    }
+    private void setListenersAndEventHandlers()
+    {
+        SearchBar.setOnKeyPressed(new EventHandler<KeyEvent>()
+        {
+         @Override
+         public void handle(KeyEvent event)
+         {
+             if (event.getCode() == KeyCode.ENTER)
+             {
+                 String searchString = SearchBar.getText();
+                 searchForString(searchString);
+             }
+         }
+        });
     }
     
     private void searchForString(String searchString) 
@@ -157,14 +211,4 @@ public class MainController implements Initializable
     
     
 }
-/*@FXML
-    private void searchClicked(MouseEvent event) 
- {
-        if (isFilterActive)
-        {
-            searchField.setText("");
-        }
-        
-        String searchString = searchField.getText();
-        searchForString(searchString);
-    }*/
+
