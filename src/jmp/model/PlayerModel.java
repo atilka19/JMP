@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import jmp.BE.AllMedia;
 import jmp.BLL.BLLException;
 import jmp.BLL.LogicManager;
+import jmp.GUI.Controller.MainController;
 import jmp.GUI.Controller.Modes;
 import jmp.model.PlayerModel;
 
@@ -26,6 +27,8 @@ public class PlayerModel
   private ObservableList<String> Categories = FXCollections.observableArrayList();
   private final LogicManager LogicManager = new LogicManager();
   private static PlayerModel instance;
+  private MainController user;
+  private String path = user.path;
   
   private Modes mediaMode;
   public PlayerModel()
@@ -145,6 +148,10 @@ public class PlayerModel
       {
           throw new ModelException(ex);
       }
+  }
+  
+  public String getPath(){
+      return path;
   }
   /*
   public BooleanProperty isPlaying()

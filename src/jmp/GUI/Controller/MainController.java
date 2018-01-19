@@ -36,6 +36,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jmp.BE.MovieList;
 import javafx.scene.input.KeyEvent;
+import java.net.URL;
 
 
 /**
@@ -58,6 +59,7 @@ public class MainController implements Initializable
     private PreparedStatement pst = null;
     private ResultSet rs = null;
     private ObservableList<MovieList> data;
+    public String path;
     private boolean isSearchActive;
     @FXML
     private TableColumn<?, ?> cName;
@@ -72,11 +74,18 @@ public class MainController implements Initializable
     @FXML
     private TableView<MovieList> tableMovies;
     
+    public VideoPlayerController videoPlayer;
+    
     //private PlayerModel model;
     
-    
+    @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
+      tableMovies.getSelectionModel().selectedItemProperty().addListener((obs,oldItem,newItem) -> {
+          this.path = newItem.getPath();
+          System.out.println(path);
+      });
+  
       data = FXCollections.observableArrayList();
       con = jmp.DAL.ConnectionManager.dbConnection();
       isSearchActive = false;
@@ -172,8 +181,7 @@ public class MainController implements Initializable
     }
     
     public String getPath(){
-            MovieList perma = tableMovies.getSelectionModel().getSelectedItem();
-            return perma.getPath();
+            return null;
     }
     
     private void setListenersAndEventHandlers()
@@ -198,10 +206,12 @@ public class MainController implements Initializable
     private void onClick_PLAY(ActionEvent event) {
                 try 
         {
-            System.out.println(getPath());
-            MovieList perma = tableMovies.getSelectionModel().getSelectedItem();
+           // System.out.println(getPath());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/jmp/GUI/View/VideoPlayer.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
+            VideoPlayerController video = (VideoPlayerController) fxmlLoader.getController();
+                        System.out.println(this.path+" main ctrl");
+            video.setPath(this.path);
             Stage stage = new Stage();
             stage.setFullScreen(true);
             stage.setScene(new Scene (root1));

@@ -15,7 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import jmp.GUI.Controller.MainController;
+import jmp.model.PlayerModel;
 
 /**
  * FXML Controller class
@@ -27,19 +27,30 @@ public class VideoPlayerController implements Initializable {
     @FXML
     private MediaView mv;
     MediaPlayer player;
-    private MainController user;
+    private PlayerModel user;
+    public String path;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println(path+" video initialize");
         
+
+    }    
+    
+    private void play(){
         
-        
-        String path = user.getPath();
-        System.out.println(path);
-        Media media = new Media(new File("C:/Users/dell/Downloads/Brooklyn99/ep1.mp4").toURI().toString());
+
+    }
+    
+    public void setPath(String inPath) {
+                System.out.println(inPath+" video player");
+
+        this.path = inPath;
+        Media media = new Media(new File(path).toURI().toString());
+        //  Media media = new Media(new File(path).toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
         final DoubleProperty width = mv.fitWidthProperty();
         final DoubleProperty height = mv.fitHeightProperty();
@@ -48,7 +59,6 @@ public class VideoPlayerController implements Initializable {
         mv.setPreserveRatio(true);
         mv.setMediaPlayer(player);
         player.play();
-    }    
-    
+    }
     
 }
