@@ -20,7 +20,7 @@ public class JMP extends Application {
     @Override
     public void start(Stage stage) throws Exception 
     {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/View/Main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/jmp/GUI/View/Main.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("JMP - The Night Owl");
