@@ -124,15 +124,15 @@ public class PlayerModel
   {
       this.mediaMode = mediaMode;
   }
-  public void setSelectedMedia (AllMedia selected) throws BLLException
+  public void setSelectedMedia (AllMedia selected) throws BLLException, ModelException
   {
       try 
       {
           LogicManager.setSelectedMedia(selected);
       }
-      catch (Exception e)
+      catch (BLLException ex)
       {
-          
+          throw new ModelException(ex);
       }
   }
   public AllMedia getSelectedMedia() throws ModelException
@@ -176,16 +176,5 @@ public class PlayerModel
           throw new ModelException(ex);
       }
   }
-  public void setMedia (AllMedia media) throws ModelException
-  {
-      try 
-      {
-          LogicManager.setMedia(media);
-      }
-      catch (BLLException ex)
-      {
-          throw new ModelException(ex);
-      }
-  }
-  */
+*/
 }

@@ -65,27 +65,5 @@ public List<String> getCategories() throws BLLException
      
 
  }
- /*
- public void setMedia(AllMedia media) throws BLLException
- {
-     if (media == null)
-     {
-         throw new BLLException("No selection!");
-     }
-     player.setMedia(media);
- }
- public void playMedia() throws BLLException
- {
-     player.play();
- }
- public void pauseMedia()
- {
-     player.pause();
- }
-public BooleanProperty isPlaying()
-{
-    return player.isPlayingProperty();
-}
 
- */
 }

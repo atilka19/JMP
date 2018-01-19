@@ -3,13 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/GUI/Controller/MainController.java</file>
             <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/model/ModelException.java</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/BLL/MObjectManager.java</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/GUI/Controller/NewCategoryController.java</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/BE/MovieList.java</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/BLL/BLLException.java</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/GUI/Controller/NewMovieController.java</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/BLL/LogicManager.java</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/nbproject/jfx-impl.xml</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/GUI/Controller/MainController.java</file>
             <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/BE/AllMedia.java</file>
             <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/JMP.java</file>
-            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/GUI/View/Main.fxml</file>
             <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/model/PlayerModel.java</file>
-            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/GUI/Controller/NewMovieController.java</file>
+            <file>file:/C:/Users/atilk/Desktop/Oskola/Github%20Repo's/JMP/src/jmp/DAL/MediaManager.java</file>
         </group>
     </open-files>
 </project-private>

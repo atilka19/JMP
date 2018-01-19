@@ -5,6 +5,7 @@
  */
 package jmp.GUI.Controller;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -17,7 +18,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import jmp.BE.AllMedia;
 import jmp.BLL.BLLException;
 import jmp.model.ModelException;
@@ -48,6 +51,7 @@ public class NewMovieController implements Initializable {
     private PlayerModel model;
     private AllMedia workingMedia;
     private Modes mode;
+    public String path;
 
     @Override
     public void initialize(URL url, ResourceBundle resources) 
@@ -86,9 +90,17 @@ public class NewMovieController implements Initializable {
     @FXML
     private void chooseFileClicked(ActionEvent event)
     {
-     
+        Stage stage = new Stage(); 
+        FileChooser fc = new FileChooser();
+     fc.getExtensionFilters().addAll(
+         new ExtensionFilter("mp4", "*.mp4"),
+         new ExtensionFilter("mpeg4", "*mpeg4"));
+     File selectedFile = fc.showOpenDialog(stage);
+     this.path = selectedFile.getAbsolutePath();
+     this.path = (workingMedia.getPath());
+         
         
-        //someString = moviePath.getText();
+        
     }
     private void fillData()
     {
