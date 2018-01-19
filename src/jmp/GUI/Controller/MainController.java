@@ -25,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
@@ -73,15 +74,21 @@ public class MainController implements Initializable
     private TextField SearchBar;
     @FXML
     private TableView<MovieList> tableMovies;
-    
+    public String path;
     private PlayerModel model;
     private AllMedia currentMedia;
     
     //private PlayerModel model;
+    @FXML
+    private Button addCategoryButton;
     
     
     public void initialize(URL url, ResourceBundle rb) 
     {
+      tableMovies.getSelectionModel().selectedItemProperty().addListener((obs,oldItem,newItem) -> {
+          this.path = newItem.getPath();
+      });
+        
       data = FXCollections.observableArrayList();
       con = jmp.DAL.ConnectionManager.dbConnection();
       isSearchActive = false;
@@ -139,12 +146,12 @@ public class MainController implements Initializable
     {
         try 
         {
-         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/View/AddMovietoCategory.fxml"));
-         Parent root1 = (Parent) fxmlLoader.load();
-         Stage stage = new Stage();
-         stage.setScene(new Scene (root1));
-         stage.setTitle("Add a Movie to Category");
-         stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/jmp/GUI/View/AddMovietoCategory.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene (root1));
+        stage.setTitle("Add a Movie");
+        stage.show();
         }
         catch (IOException ex) 
         {
@@ -198,6 +205,10 @@ public class MainController implements Initializable
         {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/jmp/GUI/View/VideoPlayer.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
+            VideoPlayerController videoPlayer = (VideoPlayerController) fxmlLoader.getController();
+            
+               videoPlayer.setPath(this.path);
+            
             Stage stage = new Stage();
             stage.setFullScreen(true);
             stage.setScene(new Scene (root1));

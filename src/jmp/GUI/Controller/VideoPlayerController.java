@@ -29,6 +29,7 @@ public class VideoPlayerController implements Initializable {
     @FXML
     private MediaView mv;
     MediaPlayer player;
+    String path;
 
     /**
      * Initializes the controller class.
@@ -36,7 +37,13 @@ public class VideoPlayerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        Media media = new Media(new File("C:/Users/dell/Downloads/Brooklyn99/ep1.mp4").toURI().toString());
+       
+    }    
+    
+    public void setPath(String inPath) {
+        this.path = inPath;
+        
+        Media media = new Media(new File(this.path).toURI().toString());
         MediaPlayer player = new MediaPlayer(media);
         final DoubleProperty width = mv.fitWidthProperty();
         final DoubleProperty height = mv.fitHeightProperty();
@@ -45,7 +52,7 @@ public class VideoPlayerController implements Initializable {
         mv.setPreserveRatio(true);
         mv.setMediaPlayer(player);
         player.play();
-    }    
+    }
     
     
 }
