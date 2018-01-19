@@ -36,7 +36,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jmp.BE.MovieList;
 import javafx.scene.input.KeyEvent;
-import java.net.URL;
+import jmp.BE.AllMedia;
+import jmp.model.PlayerModel;
 
 
 /**
@@ -59,7 +60,6 @@ public class MainController implements Initializable
     private PreparedStatement pst = null;
     private ResultSet rs = null;
     private ObservableList<MovieList> data;
-    public String path;
     private boolean isSearchActive;
     @FXML
     private TableColumn<?, ?> cName;
@@ -74,26 +74,21 @@ public class MainController implements Initializable
     @FXML
     private TableView<MovieList> tableMovies;
     
-    public VideoPlayerController videoPlayer;
+    private PlayerModel model;
+    private AllMedia currentMedia;
     
     //private PlayerModel model;
     
-    @Override
+    
     public void initialize(URL url, ResourceBundle rb) 
     {
-      tableMovies.getSelectionModel().selectedItemProperty().addListener((obs,oldItem,newItem) -> {
-          this.path = newItem.getPath();
-          System.out.println(path);
-      });
-  
       data = FXCollections.observableArrayList();
       con = jmp.DAL.ConnectionManager.dbConnection();
       isSearchActive = false;
       setCellTable();
       loadDataFromDB();
       setListenersAndEventHandlers();
-
-      //model = PlayerModel.getInstance();
+      model = PlayerModel.getInstance();
     }
         private void setCellTable() {
         cName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -107,7 +102,7 @@ public class MainController implements Initializable
     {
         try 
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/View/NewMovie.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/jmp/GUI/View/NewMovie.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             Stage stage = new Stage();
             stage.setScene(new Scene (root1));
@@ -123,8 +118,11 @@ public class MainController implements Initializable
     private void addCategoryClicked (ActionEvent event)
     {
         try 
-        { FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gui/View/NewCategory.fxml"));
+        {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/jmp/GUI/View/NewCategory.fxml"));
+        
         Parent root1 = (Parent) fxmlLoader.load();
+        
         Stage stage = new Stage();
         stage.setScene(new Scene(root1));
         stage.setTitle("Add a New Category");
@@ -161,9 +159,8 @@ public class MainController implements Initializable
          Searchbar.setText("");   
         } 
         String searchString = Searchbar.getText();
-        //searchForString(searchString);
+        searchForString(searchString);
     }
-    
     
 
     private void loadDataFromDB() {
@@ -179,11 +176,6 @@ public class MainController implements Initializable
         }
         tableMovies.setItems(data);
     }
-    
-    public String getPath(){
-            return null;
-    }
-    
     private void setListenersAndEventHandlers()
     {
         SearchBar.setOnKeyPressed(new EventHandler<KeyEvent>()
@@ -194,24 +186,18 @@ public class MainController implements Initializable
              if (event.getCode() == KeyCode.ENTER)
              {
                  String searchString = SearchBar.getText();
-                 //searchForString(searchString);
+                 searchForString(searchString);
              }
          }
         });
     }
     
-    
-    
     @FXML
     private void onClick_PLAY(ActionEvent event) {
                 try 
         {
-           // System.out.println(getPath());
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/jmp/GUI/View/VideoPlayer.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
-            VideoPlayerController video = (VideoPlayerController) fxmlLoader.getController();
-                        System.out.println(this.path+" main ctrl");
-            video.setPath(this.path);
             Stage stage = new Stage();
             stage.setFullScreen(true);
             stage.setScene(new Scene (root1));
@@ -224,7 +210,7 @@ public class MainController implements Initializable
         }
         
     }
-    /*
+ 
     private void searchForString(String searchString) 
     {
         if (!searchString.isEmpty()) 
@@ -243,7 +229,6 @@ public class MainController implements Initializable
     {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    */
 
     @FXML
     private void searchClicked(ActionEvent event) {

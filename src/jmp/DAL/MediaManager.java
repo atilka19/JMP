@@ -48,12 +48,12 @@ public class MediaManager
  {
      try(Connection con = Cm.dbConnection()) 
      {
-         PreparedStatement pstatement = con.prepareStatement("Insert into movies(name,,rating,prating,path) Values(?,?,?,?)", 
+         PreparedStatement pstatement = con.prepareStatement("Insert into movies(name,rating,prating,path) Values(?,?,?,?)", 
          Statement.RETURN_GENERATED_KEYS);
-         pstatement.setString(2, media.getTitle());
-         pstatement.setDouble(3, media.getRatingP());
-         pstatement.setDouble(4, media.getRatingIMDB());
-         pstatement.setString(5, media.getPath());
+         pstatement.setString(1, media.getTitle());
+         pstatement.setDouble(2, media.getRatingP());
+         pstatement.setDouble(3, media.getRatingIMDB());
+         pstatement.setString(4, media.getPath());
          int affected = pstatement.executeUpdate();
          if (affected < 1)
          {
@@ -72,9 +72,9 @@ public class MediaManager
      {
          PreparedStatement pstatement = con.prepareStatement("Update Movie SET: Title=?, Categories=?, time=?, path=?, Pers. Rating=?, IMDB Rating=?");
          pstatement.setString(1, media.getTitle());
-         pstatement.setDouble(4, media.getRatingP());
-         pstatement.setDouble(5, media.getRatingIMDB());
-         pstatement.setString(6, media.getPath());
+         pstatement.setDouble(2, media.getRatingP());
+         pstatement.setDouble(3, media.getRatingIMDB());
+         pstatement.setString(4, media.getPath());
          int affected = pstatement.executeUpdate();
          if (affected < 1)
          {

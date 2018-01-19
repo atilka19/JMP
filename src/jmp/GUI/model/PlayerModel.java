@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package jmp.model;
+package jmp.gui.model;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
@@ -13,7 +13,6 @@ import jmp.BE.AllMedia;
 import jmp.BLL.BLLException;
 import jmp.BLL.LogicManager;
 import jmp.GUI.Controller.Modes;
-import jmp.model.ModelException;
 
 /**
  *
@@ -130,9 +129,9 @@ public class PlayerModel
       {
           LogicManager.setSelectedMedia(selected);
       }
-      catch (Exception e)
+      catch (BLLException ex)
       {
-          
+          //throw new ModelException(ex);
       }
   }
   public AllMedia getSelectedMedia() throws ModelException
@@ -146,7 +145,10 @@ public class PlayerModel
           throw new ModelException(ex);
       }
   }
-
+ /* public BooleanProperty isPlaying()
+  {
+      return LogicManager.isPlaying();
+  }*/
   public void searchString (String search)
   {
       SearchList.clear();
@@ -164,8 +166,7 @@ public class PlayerModel
           }
       }
   }
-  /*
-  public void playMedia() throws ModelException
+  /*public void playMedia() throws ModelException
   {
       try 
       {
@@ -186,6 +187,6 @@ public class PlayerModel
       {
           throw new ModelException(ex);
       }
-  }
-  */
+  }*/
+  
 }

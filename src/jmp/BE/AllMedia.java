@@ -18,6 +18,8 @@ public class AllMedia
     private double prating;
     private double rating;
     private Media media;
+    private String RatingString;
+    private String PRatingString;
     
   public AllMedia(String Name, String Path, double rating, double prating)
   {
@@ -76,11 +78,35 @@ public class AllMedia
   {
       this.rating = rating;
   }
+  public String getRatingString()
+  {
+     RatingString = new Double(rating).toString();
+     return RatingString;
+  }
+  public String getPRatingString()
+  {
+      PRatingString = new Double(prating).toString();
+      return PRatingString;
+  }
+  public double setRatingIMDBS(String value)
+  {
+      rating = Double.parseDouble(value);
+      return rating;
+  }
+  public double setPRatingS(String value)
+  {
+      prating = Double.parseDouble(value);
+      return prating;
+  }
+  public void setMedia(Media media)
+  {
+      this.media = media;
+  }
 
   @Override
   public String toString()
   {
-    return "Name: " + getTitle() + "Pers. Rating: " + getRatingP() + "IMDB Rating" + getRatingIMDB();
+    return "Name: " + getTitle() + "Pers. Rating: " + getRatingP() + "IMDB Rating" + getRatingIMDB() + "Path" + getPath();
 
   }
 }
