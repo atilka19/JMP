@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmp.GUI.Controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="413.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jmp.GUI.Controller.MainController">
    <children>
       <TableView fx:id="tableMovies" layoutY="138.0" prefHeight="275.0" prefWidth="800.0">
         <columns>
@@ -19,12 +19,12 @@
             <TableColumn fx:id="cPath" prefWidth="395.5" text="Path" />
         </columns>
       </TableView>
-      <TextField fx:id="SearchBar" layoutX="14.0" layoutY="104.0" prefHeight="25.0" prefWidth="250.0" text="What are you looking for ?" />
+      <TextField fx:id="SearchBar" editable="false" layoutX="14.0" layoutY="104.0" opacity="0.29" prefHeight="25.0" prefWidth="250.0" text="WIP - Work in Progress" />
       <Button layoutX="556.0" layoutY="104.0" mnemonicParsing="false" onAction="#onClick_PLAY" prefHeight="25.0" prefWidth="131.0" text="Play Selected Movie" />
       <Button layoutX="119.0" layoutY="67.0" mnemonicParsing="false" onAction="#addMovieClicked" text="Add Movie" />
       <Button fx:id="addCategoryButton" layoutX="17.0" layoutY="67.0" mnemonicParsing="false" onAction="#addCategoryClicked" text="Add Category" />
-      <ComboBox layoutX="240.0" layoutY="67.0" prefWidth="150.0" />
-      <Label layoutX="266.0" layoutY="38.0" text="Choose category">
+      <ComboBox fx:id="categoryChoose" layoutX="247.0" layoutY="36.0" onAction="#filterSelected" prefWidth="150.0" />
+      <Label layoutX="266.0" layoutY="13.0" text="Choose category">
          <font>
             <Font size="15.0" />
          </font>
@@ -36,5 +36,7 @@
          </font>
       </Label>
       <Button layoutX="37.0" layoutY="23.0" mnemonicParsing="false" onAction="#addMovieToCategoryClicked" text="Add Movie to Category" />
+      <Button layoutX="287.0" layoutY="67.0" mnemonicParsing="false" onAction="#clearFilter" text="Clear filter" />
+      <Button layoutX="374.0" layoutY="104.0" mnemonicParsing="false" onAction="#clickDelete" text="Delete" />
    </children>
 </AnchorPane>

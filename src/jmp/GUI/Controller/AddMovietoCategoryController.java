@@ -9,7 +9,10 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -48,6 +51,23 @@ public class AddMovietoCategoryController implements Initializable {
 
     @FXML
     private void addMovieToCategory(ActionEvent event) {
+        String moviename = movieBox.getSelectionModel().getSelectedItem().toString();
+        System.out.println(moviename);
+        String categoryname = categoryBox.getSelectionModel().getSelectedItem().toString();
+        System.out.println(categoryname);
+        String merge = "INSERT INTO catmovies (movieid, categoryid) SELECT movies.id, category.id FROM movies INNER JOIN category ON movies.name = ? AND category.name = ?";
+        try {
+            pst = conn.prepareStatement(merge);
+            pst.setString(1, moviename);
+            pst.setString(2, categoryname);
+            
+            int i = pst.executeUpdate();
+            if(i == 1)
+                System.out.println("Done.");
+        } catch (SQLException ex) {
+            Logger.getLogger(AddMovietoCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
     
     private void fillCategory() {

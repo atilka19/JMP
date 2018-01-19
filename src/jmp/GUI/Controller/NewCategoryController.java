@@ -2,6 +2,10 @@
 package jmp.GUI.Controller;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,25 +33,31 @@ public class NewCategoryController implements Initializable
     private Button btnCancel;
     @FXML
     private Button btnSave;
+    private ResultSet rs = null;
+    private Connection conn = null;
+    private PreparedStatement pst = null;
     @Override
-    public void initialize(URL url, ResourceBundle rb) 
-    {
-      model = PlayerModel.getInstance();
+    public void initialize(URL url, ResourceBundle rb) {
+        conn = jmp.DAL.ConnectionManager.dbConnection();
     }
 @FXML
 private void SaveClick(ActionEvent event)
 {
     String Category = txtField.getText();
-    try
-    {
-        model.addNewCategory(Category);
-    }
-    catch (ModelException ex)
-    {
-        Logger.getLogger(NewCategoryController.class.getName()).log(Level.SEVERE, null, ex);
-            showAlert(ex);
-    }
-    closeWindow();
+    System.out.println(Category);
+    
+    String addCat = "insert into category (name) VALUES(?)";
+        try {
+            pst = conn.prepareStatement(addCat);
+            pst.setString(1, Category);
+            
+            int i = pst.executeUpdate();
+            if(i == 1)
+                System.out.println("New category added.");
+        } catch (SQLException ex) {
+            Logger.getLogger(NewCategoryController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     
 }
 @FXML

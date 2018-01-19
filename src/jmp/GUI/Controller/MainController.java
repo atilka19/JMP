@@ -26,6 +26,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
@@ -37,6 +38,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jmp.BE.MovieList;
 import javafx.scene.input.KeyEvent;
+import javax.swing.JOptionPane;
 import jmp.BE.AllMedia;
 import jmp.model.PlayerModel;
 
@@ -61,6 +63,7 @@ public class MainController implements Initializable
     private PreparedStatement pst = null;
     private ResultSet rs = null;
     private ObservableList<MovieList> data;
+    final ObservableList categories = FXCollections.observableArrayList();
     private boolean isSearchActive;
     @FXML
     private TableColumn<?, ?> cName;
@@ -81,17 +84,20 @@ public class MainController implements Initializable
     //private PlayerModel model;
     @FXML
     private Button addCategoryButton;
+    @FXML
+    private ComboBox<?> categoryChoose;
     
     
     public void initialize(URL url, ResourceBundle rb) 
     {
       tableMovies.getSelectionModel().selectedItemProperty().addListener((obs,oldItem,newItem) -> {
-          this.path = newItem.getPath();
+      this.path = newItem.getPath();
       });
         
       data = FXCollections.observableArrayList();
       con = jmp.DAL.ConnectionManager.dbConnection();
       isSearchActive = false;
+      fillCategory();
       setCellTable();
       loadDataFromDB();
       setListenersAndEventHandlers();
@@ -140,6 +146,25 @@ public class MainController implements Initializable
         {
             Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void fillCategory() {
+        
+        try {
+        String sql = "select name from category";
+        pst=con.prepareStatement(sql);
+        rs = pst.executeQuery();
+        
+        while(rs.next()) {
+        categories.add(rs.getString("name"));
+        categoryChoose.setItems(categories);
+        
+        } 
+        
+        }catch (Exception e){
+                
+                JOptionPane.showMessageDialog(null, e);
+                }
+      
     }
     @FXML
     private void addMovieToCategoryClicked (ActionEvent event)
@@ -243,6 +268,50 @@ public class MainController implements Initializable
 
     @FXML
     private void searchClicked(ActionEvent event) {
+    }
+
+    @FXML
+    private void filterSelected(ActionEvent event) {
+        String filter = categoryChoose.getSelectionModel().getSelectedItem().toString();
+        System.out.println(filter);
+        data.clear();
+        try {
+            pst = con.prepareStatement("Select movies.name, movies.rating, movies.prating, movies.path from movies, category, catmovies where movies.id = catmovies.movieid AND category.id = catmovies.categoryid AND category.name = ?");
+            pst.setString(1, filter);
+            rs = pst.executeQuery();
+            while(rs.next()){
+                data.add(new MovieList(rs.getString(1), ""+rs.getFloat(2), ""+rs.getFloat(3), rs.getString(4)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        tableMovies.setItems(data);
+    }
+
+    @FXML
+    private void clearFilter(ActionEvent event) {
+        data.clear();
+        loadDataFromDB();
+    }
+
+    @FXML
+    private void clickDelete(ActionEvent event) {
+        String selected = tableMovies.getSelectionModel().getSelectedItem().getName();
+        System.out.println(selected);
+        String delete = "delete from movies where name = ?";
+        try {
+            pst = con.prepareStatement(delete);
+            pst.setString(1, selected);
+            
+            int i = pst.executeUpdate();
+            if(i == 1)
+                System.out.println("Deleted");
+            
+            data.clear();
+            loadDataFromDB();
+        } catch (SQLException ex) {
+            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
 }
